@@ -1,6 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
 let projectData = {};
-
 // Require Express to run server and routes
 const express = require('express');
 
@@ -21,9 +20,12 @@ app.use(bodyParser.json());
 const cors = require('cors');
 app.use(cors());
 
-// Initialize the main project folder
-app.use(express.static('website'));
+app.use(express.static('dist'))
 
+// Initialize the index.html page, when entering root url
+app.get('/', function(req, res) {
+    res.sendFile('dist/index.html')
+});
 
 // Setup Server
 const port = 8000;
