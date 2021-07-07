@@ -8,7 +8,7 @@ body{
     grid-auto-rows: minmax(150px, auto);
     /* grid-template-columns:  */
     height:100vh;
-    background: #f23557;
+    background: #e235f2;
     color: #f0d43a;
     justify-content: center;
     grid-gap: 1em;
@@ -44,7 +44,7 @@ body{
 
 }
 .title{
-
+    font-style: oblique;
 }
 
 /*  Basic Styling To Override Default For Basic HTML Elements */

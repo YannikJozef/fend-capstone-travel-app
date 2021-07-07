@@ -1,6 +1,6 @@
 /* Global Variables */
-const baseURL = `http://api.openweathermap.org/data/2.5/weather?zip=`;
-const apiKey = '&appid=390f72edc426bdba901258d9fa6b5c17&units=metric';
+const baseURL = `http://api.geonames.org/searchJSON?q=`;
+const apiKey = '&maxRows=100&username=yannikj.';
 
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -10,7 +10,7 @@ let newDate = d.getMonth() + 1 + '/' + d.getDate() + '/' + d.getFullYear();
 document.getElementById('generate').addEventListener('click', performAction);
 
 function performAction(e) {
-    const zipCode = document.getElementById('zip').value;
+    const cityName = document.getElementById('city').value;
     const feeling = document.getElementById('feelings').value;
     getWeather(baseURL, zipCode, apiKey).then(function (data) {
         postData('/addData', {
@@ -26,9 +26,9 @@ function performAction(e) {
 }
 
 //async function to get data from open weather api
-const getWeather = async (baseURL, zip, key) => {
-    console.log(baseURL + zip + key);
-    const res = await fetch(baseURL + zip + key);
+const getWeather = async (baseURL, city, key) => {
+    console.log(baseURL + city + key);
+    const res = await fetch(baseURL + city + key);
     try {
         const data = await res.json();
         return data;
@@ -82,3 +82,10 @@ const updateUI = async () => {
     }
 }
 
+export {
+    performAction,
+    getWeather,
+    postData,
+    getData,
+    updateUI
+}
