@@ -5,12 +5,13 @@ body{
 
 #app{
     display: grid;
-    grid-auto-rows: minmax(150px, auto);
+    grid-auto-rows: minmax(10px, auto);
     /* grid-template-columns:  */
-    height:100vh;
+    height:200vh;
     background: #e235f2;
     color: #f0d43a;
     justify-content: center;
+    align-items: inherit;
     grid-gap: 1em;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;

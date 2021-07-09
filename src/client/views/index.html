@@ -9,11 +9,15 @@
  <body>
 <div id = "app">
   <div class ="holder headline">
-    Seather Bournal Wrap
+    Travel App
   </div>
   <div class ="holder city">
-    <label for="city">Enter City Name Here</label>
-    <input type="text" id="zip" placeholder="enter city name here">
+    <label for="city-name">Location</label>
+    <input type="text" id="city-name" placeholder="City Name" required>
+  </div>
+  <div class ="holder date">
+    <label for="date-start">Departure-Date</label>
+    <input type="date" id="date-start" required>
   </div>
   <div class ="holder feel">
     <label for="feelings">How are you feeling today?</label>
@@ -24,8 +28,11 @@
     <div class = "title">Most Recent Entry</div>
    <div id = "entryHolder">
     <div id = "date"></div> 
-   <div id = "temp"></div>
-   <div id = "content"></div>
+    <div id = "city-display"></div>
+    <div id = "country-display"></div>
+    <div id = "lng-display"></div>
+    <div id = "lat-display"></div>
+    <div id = "content"></div>
   </div>
   </div>
   </div>

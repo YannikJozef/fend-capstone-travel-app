@@ -50,7 +50,9 @@ app.post('/addData', function (req, res) {
 
     const newEntry = {
         name: req.body.name,
-        temperature: req.body.temperature,
+        country: req.body.country,
+        lng: req.body.lng,
+        lat: req.body.lat,
         date: req.body.date,
         feeling: req.body.feeling
     }

@@ -1,6 +1,6 @@
 /* Global Variables */
 const baseURL = `http://api.geonames.org/searchJSON?q=`;
-const apiKey = '&maxRows=100&username=yannikj.';
+const apiKey = '&maxRows=1&username=yannikj.';
 
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -10,12 +10,14 @@ let newDate = d.getMonth() + 1 + '/' + d.getDate() + '/' + d.getFullYear();
 document.getElementById('generate').addEventListener('click', performAction);
 
 function performAction(e) {
-    const cityName = document.getElementById('city').value;
+    const cityName = document.getElementById('city-name').value;
     const feeling = document.getElementById('feelings').value;
-    getWeather(baseURL, zipCode, apiKey).then(function (data) {
+    getWeather(baseURL, cityName, apiKey).then(function (data) {
         postData('/addData', {
-            name: data.name,
-            temperature: data.main.temp,
+            name: data.geonames[0].name,
+            country: data.geonames[0].countryName,
+            lng: data.geonames[0].lng,
+            lat: data.geonames[0].lat,
             date: newDate,
             feeling: feeling
         })
@@ -74,8 +76,15 @@ const updateUI = async () => {
     const res = await fetch('/all');
     try {
         const data = await res.json();
-        document.getElementById('date').innerHTML = data['date'];
-        document.getElementById('temp').innerHTML = data['temperature'];
+        const date1 = new Date(data['date']).getTime();
+        const date2 = new Date(document.getElementById('date-start').value).getTime();
+        const oneDay = 1000 * 60 * 60 * 24;
+        const dateDif = Math.round(( date2 - date1 ) / oneDay);
+        document.getElementById('date').innerHTML = dateDif;
+        document.getElementById('city-display').innerHTML = data['name'];
+        document.getElementById('country-display').innerHTML = data['country'];
+        document.getElementById('lng-display').innerHTML = data['lng'];
+        document.getElementById('lat-display').innerHTML = data['lat'];
         document.getElementById('content').innerHTML = data['feeling'];
     } catch (error) {
         console.log('error', error);
