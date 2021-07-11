@@ -1,3 +1,8 @@
+// dotenv configuration
+const dotenv = require('dotenv');
+const fetch = require("node-fetch");
+dotenv.config();
+const wbApiKey = process.env.wbApiKey;
 // Setup empty JS object to act as endpoint for all routes
 let projectData = {};
 // Require Express to run server and routes
@@ -46,8 +51,7 @@ function sendData(req, res) {
 };
 
 // POST method route
-app.post('/addData', function (req, res) {
-
+app.post('/addData', async function (req, res) {
     const newEntry = {
         name: req.body.name,
         country: req.body.country,
@@ -55,9 +59,28 @@ app.post('/addData', function (req, res) {
         lat: req.body.lat,
         date: req.body.date,
         feeling: req.body.feeling
+    };
+    function addElement (elementList, element) {
+        let newList = Object.assign(elementList, element)
+        return newList
+    };
+    // addElement (newEntry, {id: 'wow'})
+    // newEntry.push({id: 'wow'})
+    console.log(`https://api.weatherbit.io/v2.0/forecast/daily?city=${newEntry.name},NC&key=${wbApiKey}`);
+    const response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?city=${newEntry.name},NC&key=${wbApiKey}`);
+    try {
+        const apiData = await response.json();
+        const element = { lowTemp: apiData.data[0].low_temp, highTemp: apiData.data[0].high_temp, description: apiData.data[0].weather.description };
+        console.log(element);
+        addElement (newEntry, element);
+        console.log(newEntry);
+        // res.send(apiData);
     }
+    catch (error) {
+        console.log('error', error);
+    };
     console.log('Post received');
     projectData = newEntry;
-    res.send(projectData);
+    // res.send(projectData);
     console.log(projectData);
 });

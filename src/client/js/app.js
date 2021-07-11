@@ -21,9 +21,9 @@ function performAction(e) {
             date: newDate,
             feeling: feeling
         })
-    }).then(function () {
-        updateUI()
-    });
+    }).then( function () {
+        updateUI()}
+        );
 
 }
 
@@ -76,8 +76,11 @@ const updateUI = async () => {
     const res = await fetch('/all');
     try {
         const data = await res.json();
-        const date1 = new Date(data['date']).getTime();
+        console.log(data.name);
+        const date1 = new Date(data.date).getTime();
         const date2 = new Date(document.getElementById('date-start').value).getTime();
+        console.log(date1);
+        console.log(date2);
         const oneDay = 1000 * 60 * 60 * 24;
         const dateDif = Math.round(( date2 - date1 ) / oneDay);
         document.getElementById('date').innerHTML = dateDif;
