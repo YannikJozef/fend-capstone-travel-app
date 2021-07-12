@@ -50,31 +50,6 @@ function sendData(req, res) {
 };
 
 // POST method route
-// app.post('/addData', async function (req, res) {
-//     const newEntry = {
-//                 name: req.body.name,
-//                 country: req.body.country,
-//             };
-//     console.log(newEntry);
-//     // projectData.push(newEntry);
-//     // console.log(projectData);
-//     res.send(newEntry);
-// })
-
-
-// app.post('/addData', async function(req, res){
-//     console.log(`https://api.weatherbit.io/v2.0/forecast/daily?city=${req.body.name},NC&key=${wbApiKey}`);
-//     const response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?city=${req.body.name},NC&key=${wbApiKey}`);
-//     try {
-//         const apiData = await response.json();
-//         console.log(apiData.data[0].high_temp);
-//         return res.send(apiData.data[0]);
-//     }
-//     catch (error) {
-//         console.log('error', error);
-//     }
-// })
-
 app.post('/addData', async function (req, res) {
     const newEntry = {
         name: req.body.name,
@@ -90,8 +65,8 @@ app.post('/addData', async function (req, res) {
         return newList
     };
     // weatherbit API Call
-    console.log(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${newEntry.lat}&lon=${newEntry.lng}&key=${wbApiKey}&units=I`);
-    const responseWb = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${newEntry.lat}&lon=${newEntry.lng}&key=${wbApiKey}&units=I`);
+    console.log(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${newEntry.lat}&lon=${newEntry.lng}&key=${wbApiKey}&units=M`);
+    const responseWb = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${newEntry.lat}&lon=${newEntry.lng}&key=${wbApiKey}&units=M`);
 
     // pixabay API Call
     console.log(`https://pixabay.com/api/?key=${pixApiKey}&q=${req.body.name}&image_type=photo`);

@@ -119,12 +119,9 @@ function updateUI (apiResponse) {
     console.log(date2);
     const oneDay = 1000 * 60 * 60 * 24;
     const dateDif = Math.round(( date2 - date1 ) / oneDay);
-    document.getElementById('date').innerHTML = dateDif;
-    document.getElementById('city-display').innerHTML = apiResponse['name'];
-    document.getElementById('country-display').innerHTML = apiResponse['country'];
-    document.getElementById('lng-display').innerHTML = apiResponse['lng'];
-    document.getElementById('lat-display').innerHTML = apiResponse['lat'];
-    document.getElementById('content').innerHTML = apiResponse['feeling'];
+    document.getElementById('destination').innerHTML = `${apiResponse['name']}, ${apiResponse['country']} is ${dateDif} days away` ;
+    document.getElementById('temperature').innerHTML = `Max Temperature:${apiResponse['highTemp']} C°, lowest temperature:${apiResponse['lowTemp']} C° `;
+    document.getElementById('weather-description').innerHTML = `Weather: ${apiResponse['description']}`;
     document.getElementById('city-img').setAttribute('src', apiResponse['urlPicture'])
 } 
 
