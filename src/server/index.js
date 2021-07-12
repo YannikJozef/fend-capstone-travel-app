@@ -9,6 +9,7 @@ const fetch = require("node-fetch");
 
 //referring to the env file to get the API key
 const wbApiKey = process.env.wbApiKey;
+const pixApiKey = process.env.pixApiKey
 
 // Setup empty JS object to act as endpoint for all routes
 let projectData = [];
@@ -88,19 +89,29 @@ app.post('/addData', async function (req, res) {
         let newList = Object.assign(elementList, element)
         return newList
     };
-    console.log(`https://api.weatherbit.io/v2.0/forecast/daily?city=${req.body.name},NC&key=${wbApiKey}`);
-    const response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?city=${req.body.name},NC&key=${wbApiKey}`);
-        try {const apiData = await response.json();
-        const element = { lowTemp: apiData.data[0].low_temp, highTemp: apiData.data[0].high_temp, description: apiData.data[0].weather.description };
-        addElement (newEntry, element);
-        projectData.push(newEntry);
-        console.log(newEntry);
-        // res.send(projectData);
-        console.log('Post received');
-        projectData.push(newEntry);
-        res.send(projectData[0]);
-        console.log(projectData[0]); }
-        catch (error) {
-        console.log('error', error);
+    // weatherbit API Call
+    console.log(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${newEntry.lat}&lon=${newEntry.lng}&key=${wbApiKey}&units=I`);
+    const responseWb = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${newEntry.lat}&lon=${newEntry.lng}&key=${wbApiKey}&units=I`);
+
+    // pixabay API Call
+    console.log(`https://pixabay.com/api/?key=${pixApiKey}&q=${req.body.name}&image_type=photo`);
+    const responsePx = await fetch(`https://pixabay.com/api/?key=${pixApiKey}&q=${req.body.name}&image_type=photo`);
+
+    try {
+    const apiDataWb = await responseWb.json();
+    const apiDataPx = await responsePx.json();
+    const elementWb = { lowTemp: apiDataWb.data[0].low_temp, highTemp: apiDataWb.data[0].high_temp, description: apiDataWb.data[0].weather.description };
+    const elementPx = { urlPicture: apiDataPx.hits[0].webformatURL };
+    console.log(elementPx);
+    addElement (newEntry, elementWb);
+    addElement (newEntry, elementPx)
+    projectData.push(newEntry);
+    console.log(newEntry);
+    console.log('Post received');
+    projectData.push(newEntry);
+    res.send(projectData[projectData.length -1]);
+    console.log(projectData[projectData.length -1])}
+    catch (error) {
+    console.log('error', error);
     }
 });

@@ -113,10 +113,6 @@ const getData = async (url = '') => {
 
 function updateUI (apiResponse) {
     console.log(apiResponse);
-    console.log(apiResponse);
-    console.log(apiResponse);
-    console.log(apiResponse);
-    console.log(apiResponse);
     const date1 = new Date().getTime();
     const date2 = new Date(document.getElementById('date-start').value).getTime();
     console.log(date1);
@@ -129,6 +125,7 @@ function updateUI (apiResponse) {
     document.getElementById('lng-display').innerHTML = apiResponse['lng'];
     document.getElementById('lat-display').innerHTML = apiResponse['lat'];
     document.getElementById('content').innerHTML = apiResponse['feeling'];
+    document.getElementById('city-img').setAttribute('src', apiResponse['urlPicture'])
 } 
 
 export {
