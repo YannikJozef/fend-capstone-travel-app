@@ -1,29 +1,26 @@
-// dotenv configuration
 const dotenv = require('dotenv');
-const fetch = require("node-fetch");
 dotenv.config();
+
+var path = require('path')
+const express = require('express')
+var bodyParser = require('body-parser')
+var cors = require('cors')
+const fetch = require("node-fetch");
+
+//referring to the env file to get the API key
 const wbApiKey = process.env.wbApiKey;
+
 // Setup empty JS object to act as endpoint for all routes
-let projectData = {};
-// Require Express to run server and routes
-const express = require('express');
+let projectData = [];
 
-// Start up an instance of app
-const app = express();
-
-/* Dependencies */
-const bodyParser = require('body-parser');
-
-/* Middleware*/
-//Here we are configuring express to use body-parser as middle-ware.
+const app = express()
+app.use(cors())
+// to use json
+app.use(bodyParser.json())
+// to use url encoded values
 app.use(bodyParser.urlencoded({
-    extended: false
-}));
-app.use(bodyParser.json());
-
-// Cors for cross origin allowance
-const cors = require('cors');
-app.use(cors());
+  extended: true
+}))
 
 app.use(express.static('dist'))
 
@@ -47,10 +44,36 @@ app.get('/all', sendData);
 
 function sendData(req, res) {
     console.log('Request Received');
-    res.send(projectData);
+    // console.log(projectData);
+    res.send(projectData[0]);
 };
 
 // POST method route
+// app.post('/addData', async function (req, res) {
+//     const newEntry = {
+//                 name: req.body.name,
+//                 country: req.body.country,
+//             };
+//     console.log(newEntry);
+//     // projectData.push(newEntry);
+//     // console.log(projectData);
+//     res.send(newEntry);
+// })
+
+
+// app.post('/addData', async function(req, res){
+//     console.log(`https://api.weatherbit.io/v2.0/forecast/daily?city=${req.body.name},NC&key=${wbApiKey}`);
+//     const response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?city=${req.body.name},NC&key=${wbApiKey}`);
+//     try {
+//         const apiData = await response.json();
+//         console.log(apiData.data[0].high_temp);
+//         return res.send(apiData.data[0]);
+//     }
+//     catch (error) {
+//         console.log('error', error);
+//     }
+// })
+
 app.post('/addData', async function (req, res) {
     const newEntry = {
         name: req.body.name,
@@ -60,27 +83,24 @@ app.post('/addData', async function (req, res) {
         date: req.body.date,
         feeling: req.body.feeling
     };
+    
     function addElement (elementList, element) {
         let newList = Object.assign(elementList, element)
         return newList
     };
-    // addElement (newEntry, {id: 'wow'})
-    // newEntry.push({id: 'wow'})
-    console.log(`https://api.weatherbit.io/v2.0/forecast/daily?city=${newEntry.name},NC&key=${wbApiKey}`);
-    const response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?city=${newEntry.name},NC&key=${wbApiKey}`);
-    try {
-        const apiData = await response.json();
+    console.log(`https://api.weatherbit.io/v2.0/forecast/daily?city=${req.body.name},NC&key=${wbApiKey}`);
+    const response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?city=${req.body.name},NC&key=${wbApiKey}`);
+        try {const apiData = await response.json();
         const element = { lowTemp: apiData.data[0].low_temp, highTemp: apiData.data[0].high_temp, description: apiData.data[0].weather.description };
-        console.log(element);
         addElement (newEntry, element);
+        projectData.push(newEntry);
         console.log(newEntry);
-        // res.send(apiData);
-    }
-    catch (error) {
+        // res.send(projectData);
+        console.log('Post received');
+        projectData.push(newEntry);
+        res.send(projectData[0]);
+        console.log(projectData[0]); }
+        catch (error) {
         console.log('error', error);
-    };
-    console.log('Post received');
-    projectData = newEntry;
-    // res.send(projectData);
-    console.log(projectData);
+    }
 });

@@ -9,22 +9,26 @@ let newDate = d.getMonth() + 1 + '/' + d.getDate() + '/' + d.getFullYear();
 //Event Listener Function to initiate other functions
 document.getElementById('generate').addEventListener('click', performAction);
 
+// function performAction(e) {
+//     postData('http://localhost:8000/addData', {
+//         name: 'Yannik',
+//         country: 'Germany'
+//     }).then(getData('http://localhost:8000/all'))
+// };
+
 function performAction(e) {
     const cityName = document.getElementById('city-name').value;
     const feeling = document.getElementById('feelings').value;
     getWeather(baseURL, cityName, apiKey).then(function (data) {
-        postData('/addData', {
+        postData('http://localhost:8000/addData', {
             name: data.geonames[0].name,
             country: data.geonames[0].countryName,
             lng: data.geonames[0].lng,
             lat: data.geonames[0].lat,
             date: newDate,
             feeling: feeling
-        })
-    }).then( function () {
-        updateUI()}
-        );
-
+        }).then(response => {return response;}).then( (response) => { updateUI(response) } )
+    });
 }
 
 //async function to get data from open weather api
@@ -40,7 +44,19 @@ const getWeather = async (baseURL, city, key) => {
     }
 }
 
-//Creating Post Request
+// Creating Post Request
+// const postData =  (url = '', data = {}) => {
+//     fetch(url, {
+//         method: 'POST',
+//         credentials: 'same-origin',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(data), // body data type must match "Content-Type" header        
+//     }); return
+// }
+
+// Creating Post Request
 const postData = async (url = '', data = {}) => {
     const response = await fetch(url, {
         method: 'POST',
@@ -52,6 +68,7 @@ const postData = async (url = '', data = {}) => {
     });
     try {
         const newData = await response.json();
+        console.log(newData);
         return newData
     } catch (error) {
         console.log('error', error);
@@ -72,27 +89,47 @@ const getData = async (url = '') => {
 }
 
 //async function to update UI
-const updateUI = async () => {
-    const res = await fetch('/all');
-    try {
-        const data = await res.json();
-        console.log(data.name);
-        const date1 = new Date(data.date).getTime();
-        const date2 = new Date(document.getElementById('date-start').value).getTime();
-        console.log(date1);
-        console.log(date2);
-        const oneDay = 1000 * 60 * 60 * 24;
-        const dateDif = Math.round(( date2 - date1 ) / oneDay);
-        document.getElementById('date').innerHTML = dateDif;
-        document.getElementById('city-display').innerHTML = data['name'];
-        document.getElementById('country-display').innerHTML = data['country'];
-        document.getElementById('lng-display').innerHTML = data['lng'];
-        document.getElementById('lat-display').innerHTML = data['lat'];
-        document.getElementById('content').innerHTML = data['feeling'];
-    } catch (error) {
-        console.log('error', error);
-    }
-}
+// const updateUI = async () => {
+//     const res = await fetch('http://localhost:3000/all');
+//     try {
+//         const data = await res.json();
+//         console.log(data.name);
+//         const date1 = new Date(data.date).getTime();
+//         const date2 = new Date(document.getElementById('date-start').value).getTime();
+//         console.log(date1);
+//         console.log(date2);
+//         const oneDay = 1000 * 60 * 60 * 24;
+//         const dateDif = Math.round(( date2 - date1 ) / oneDay);
+//         document.getElementById('date').innerHTML = dateDif;
+//         document.getElementById('city-display').innerHTML = data['name'];
+//         document.getElementById('country-display').innerHTML = data['country'];
+//         document.getElementById('lng-display').innerHTML = data['lng'];
+//         document.getElementById('lat-display').innerHTML = data['lat'];
+//         document.getElementById('content').innerHTML = data['feeling'];
+//     } catch (error) {
+//         console.log('error', error);
+//     }
+// }
+
+function updateUI (apiResponse) {
+    console.log(apiResponse);
+    console.log(apiResponse);
+    console.log(apiResponse);
+    console.log(apiResponse);
+    console.log(apiResponse);
+    const date1 = new Date().getTime();
+    const date2 = new Date(document.getElementById('date-start').value).getTime();
+    console.log(date1);
+    console.log(date2);
+    const oneDay = 1000 * 60 * 60 * 24;
+    const dateDif = Math.round(( date2 - date1 ) / oneDay);
+    document.getElementById('date').innerHTML = dateDif;
+    document.getElementById('city-display').innerHTML = apiResponse['name'];
+    document.getElementById('country-display').innerHTML = apiResponse['country'];
+    document.getElementById('lng-display').innerHTML = apiResponse['lng'];
+    document.getElementById('lat-display').innerHTML = apiResponse['lat'];
+    document.getElementById('content').innerHTML = apiResponse['feeling'];
+} 
 
 export {
     performAction,
