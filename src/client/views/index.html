@@ -1,39 +1,73 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Weather Journal</title>
-<link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title>Capstone Travel App</title>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
 <!-- <link rel="stylesheet" href="style.scss"> -->
 </head>
- <body>
-<div id = "app">
-  <div class ="holder headline">
-    Travel App
-  </div>
-  <div class ="holder city">
-    <label for="city-name">Location</label>
-    <input type="text" id="city-name" placeholder="City Name" required>
-  </div>
-  <div class ="holder date">
-    <label for="date-start">Departure-Date</label>
-    <input type="date" id="date-start" required>
-  </div>
-  <div class ="holder feel">
-    <label for="feelings">How are you feeling today?</label>
-    <textarea class= "myInput" id="feelings" placeholder="Enter your feelings here" rows="9" cols="50"></textarea>
-    <button id="generate" type = "submit"> Generate </button>
-  </div>
-  <div class ="holder entry">
-   <div id = "entryHolder">
-    <div id = "destination"></div> 
-    <div id = "temperature"></div>
-    <div id = "weather-description"></div>
-    <img id= "city-img" src=''>
-  </div>
-  </div>
-  </div>
-<!-- <script src="app.js" type="text/javascript"></script> -->
+ 
 
+<body>
+  <!-- <div id = "app">
+    <header>
+      <p>Hello</p>
+    </header>
+    <div class = "content">
+      <p>Hey I am a content</p>
+    </div>
+    <footer>
+      <p>This by the way is a footer</p>
+    </footer>
+  </div> -->
+
+  <div id = "app">
+    <header>
+      <div class="logo">Logo</div>
+      <div class ="holder headline">Travel App</div>
+      <div class="navigation">Navigation</div>
+    </header>
+    <div class="content">
+      <section class="travelPicker">
+
+        <div id = "inputFields">
+          <div class ="holder city">
+            <label for="city-name">My trip to: </label>
+            <input type="text" id="city-name" placeholder="Enter Location" required>
+          </div>
+          <div class ="holder date">
+            <label for="date-start">Departing: </label>
+            <input type="date" id="date-start" required>
+          </div>
+          <div class ="holder button">
+            <button id="generate" type = "submit"> Generate Trip </button>
+          </div>
+        </div>
+
+      </section>
+      
+      <!-- Example -->
+      <!-- <div class ="holder travelCard">
+        <div id = "entryHolder">
+          <div id = "destination">Frankfurt, <span class = "light">Germany is 220 Days away</span></div> 
+          <div id = "temperature">max tempreature: <span class = "light">30 C°</span>, lowest temperature: <span class = "light">20 C°</span></div>
+          <div id = "weather-description">Description: <span class = "light">Scattered Clouds</span></div>
+          <img id= "city-img" src='https://cdn.pixabay.com/photo/2016/11/06/23/51/buildings-1804481_960_720.jpg'>
+        </div>
+      </div> -->
+      
+      <div class ="holder travelCard">
+        <div id = "entryHolder">
+          <div id = "destination"></div> 
+          <div id = "temperature"></div>
+          <div id = "weather-description"></div>
+          <img id= "city-img" src=''>
+        </div>
+      </div>
+    </div>
+      <footer>
+        <p>Uses different APIs for receiving Data</p>
+      </footer>
+  </div>
 </body>
 </html>

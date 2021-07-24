@@ -18,7 +18,7 @@ document.getElementById('generate').addEventListener('click', performAction);
 
 function performAction(e) {
     const cityName = document.getElementById('city-name').value;
-    const feeling = document.getElementById('feelings').value;
+    // const feeling = document.getElementById('feelings').value;
     getWeather(baseURL, cityName, apiKey).then(function (data) {
         postData('http://localhost:8000/addData', {
             name: data.geonames[0].name,
@@ -26,7 +26,7 @@ function performAction(e) {
             lng: data.geonames[0].lng,
             lat: data.geonames[0].lat,
             date: newDate,
-            feeling: feeling
+            // feeling: feeling
         }).then(response => {return response;}).then( (response) => { updateUI(response) } )
     });
 }
@@ -119,9 +119,9 @@ function updateUI (apiResponse) {
     console.log(date2);
     const oneDay = 1000 * 60 * 60 * 24;
     const dateDif = Math.round(( date2 - date1 ) / oneDay);
-    document.getElementById('destination').innerHTML = `${apiResponse['name']}, ${apiResponse['country']} is ${dateDif} days away` ;
-    document.getElementById('temperature').innerHTML = `Max Temperature:${apiResponse['highTemp']} C°, lowest temperature:${apiResponse['lowTemp']} C° `;
-    document.getElementById('weather-description').innerHTML = `Weather: ${apiResponse['description']}`;
+    document.getElementById('destination').innerHTML = `${apiResponse['name']}, <span class = "light">${apiResponse['country']} is ${dateDif} days away</span>` ;
+    document.getElementById('temperature').innerHTML = `Max Temperature:<span class = "light"> ${apiResponse['highTemp']} C°</span>, lowest temperature: <span class = "light">${apiResponse['lowTemp']} C°</span>`;
+    document.getElementById('weather-description').innerHTML = `Weather: <span class = "light">${apiResponse['description']}</span>`;
     document.getElementById('city-img').setAttribute('src', apiResponse['urlPicture'])
 } 
 

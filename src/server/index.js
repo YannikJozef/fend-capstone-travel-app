@@ -57,7 +57,7 @@ app.post('/addData', async function (req, res) {
         lng: req.body.lng,
         lat: req.body.lat,
         date: req.body.date,
-        feeling: req.body.feeling
+        // feeling: req.body.feeling
     };
     
     function addElement (elementList, element) {
