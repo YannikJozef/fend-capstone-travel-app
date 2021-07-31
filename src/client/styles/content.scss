@@ -25,7 +25,7 @@
 
 .travelPicker {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-width: 65vw;
@@ -37,7 +37,12 @@
 }
 
 .travelPicker > * {
-    margin: 50px;
+    padding: 25px;
+    border-radius: 5px;
+    // background-color: rgba(241, 175, 31, 0.247);
+    margin: 25px;
+    width: 75%;
+    border:rgb(41, 38, 38) solid 1px;
     // border: solid;
 }
 
@@ -85,9 +90,29 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    min-width: 65vw;
-    min-height: 25vh;
-    padding: 10px;
+    margin-top: -10px;
+    // min-width: 65vw;
+//     min-height: 25vh;
+    padding: 25px;
+    // border-radius: 5px;
+    // background-color: rgb(240, 237, 231);
+}
+
+#tripHolder {
+    border:none;
+    padding: 0px;
+    width: 79%;
+
+}
+
+.yourTrip {
+    font-size: xx-large;
+    font-weight: bold;
+    color: white;
+    background-color: orange;
+    padding: 5px;
     border-radius: 5px;
-    background-color: rgb(240, 237, 231);
+    border: none;
+    max-width: 30%;
+    // align-self: flex-start;
 }
