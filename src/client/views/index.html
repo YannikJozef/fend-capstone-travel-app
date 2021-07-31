@@ -30,7 +30,7 @@
     <div class="content">
       <section class="travelPicker">
 
-        <div id = "inputFields">
+        <div id = "inputFields" >
           <div class ="holder city">
             <label for="city-name">My trip to: </label>
             <input type="text" id="city-name" placeholder="Enter Location" required>
@@ -39,25 +39,25 @@
             <label for="date-start">Departing: </label>
             <input type="date" id="date-start" required>
           </div>
-          <div class ="holder button">
+          <div class ="button holder">
             <button id="generate" type = "submit"> Generate Trip </button>
+            <!-- <button id="save" type = "submit"> save </button> -->
           </div>
-        </div>
-        <div id = "tripHolder">
-          <div class = "yourTrip">Your Trip:</div>
-        </div>
-        <div class ="holder travelCard">
-          <div id = "entryHolder">
-            <div id = "entryOutput">
-              <div id = "destination"></div> 
-              <div id = "temperature"></div>
-              <div id = "weather-description"></div>
+          <div id ="travelCard">
+            <div id = "entryHolder">
+              <div id = "entryOutput">
+                <div id = "tripData"></div>
+                <div id = "destination"></div> 
+                <div id = "temperature"></div>
+                <div id = "weather-description"></div>
+              </div>
+              <img id= "city-img" src=''>
             </div>
-            <img id= "city-img" src=''>
-          </div>
-
+        </div>
       </section>
-      
+      <div id = "tripHolder">
+        <div class = "yourTrip">Your Trips:</div>
+      </div>
       <!-- Example -->
       <!-- <div class ="holder travelCard">
         <div id = "entryHolder">

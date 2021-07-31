@@ -2,8 +2,8 @@ import {
     performAction,
     getWeather,
     postData,
-    getData,
-    updateUI
+    saveTrip,
+    updateUI,
 } from './js/app'
 
 import './styles/style.scss'
@@ -15,5 +15,6 @@ export {
     getWeather,
     performAction,
     postData,
-    updateUI
+    saveTrip,
+    updateUI,
 }
