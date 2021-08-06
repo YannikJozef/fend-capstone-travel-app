@@ -180,6 +180,7 @@ function updateUI (apiResponse) {
 };
 
 let counter = 0;
+let deleteIds = [];
 
 function saveTrip(e) {
     counter++;
@@ -195,24 +196,72 @@ function saveTrip(e) {
     contentElement.appendChild(cardElement);
     cardElement.appendChild(clone);
     cardElement.setAttribute("class", "card");
-
+    cardElement.setAttribute("id", "card" + counter);
+    const attributeObject = {entryHolderNew: "entryHolder" + counter, entryOutputNew: "entryOutput" + counter, cityImgNew: "city-img" + counter, deleteNew: "delete" + counter} 
     // gute Idee hier auch noch einen Loop einzuführen, um die Ids mit einer 1 zu versehen
-    const nodes = document.getElementById(clone.id).childNodes[1].setAttribute("id", "entryHolder" + counter);
-    const nodes2 = document.getElementById('entryHolder' + counter).childNodes[1].setAttribute("id", "entryOutput" + counter);
-    const nodes3 = document.getElementById('entryHolder' + counter).childNodes[3].setAttribute("id", "city-img" + counter);
-    const nodes5 = document.getElementById('entryHolder' + counter).childNodes[5].setAttribute("id", "delete" + counter);
+    const nodes = document.getElementById(clone.id).childNodes[1].setAttribute("id", attributeObject.entryHolderNew);
+    const nodes2 = document.getElementById('entryHolder' + counter).childNodes[1].setAttribute("id", attributeObject);
+    const nodes3 = document.getElementById('entryHolder' + counter).childNodes[3].setAttribute("id", attributeObject.cityImgNew);
+    const nodes5 = document.getElementById('entryHolder' + counter).childNodes[5].setAttribute("id", attributeObject.deleteNew);
     const nodes6 = document.getElementById('entryHolder' + counter).childNodes[5].innerHTML = "Delete Trip"; 
+    // document.getElementById(attributeObject.deleteNew).addEventListener("click", function() {document.getElementById('card' + counter).remove()});
     console.log(nodes3);
+    deleteIds.push(attributeObject.deleteNew)
+    console.log(deleteIds);
+
+
+    const checkScript = document.head.contains(document.getElementById('myScript'));
+    console.log(checkScript);
+
+
+    // if (checkScript == false) {
+    //     const script = document.createElement('script');
+    //     document.head.appendChild(script); //or something of the likes
+    //     const myScript = document.head.childNodes[8];
+    //     console.log(document.head.childNodes[8]);
+    //     myScript.setAttribute("id", "myScript");
+    //     myScript.setAttribute("type", "text/javascript");
+    //     console.log(myScript);
+    //     myScript.innerHTML = "document.getElementById('clear').addEventListener('click', alert('Hi'));"
+    //     return myScript
+    // } else {
+    //     myScript.innerHTML = "document.getElementById('clear').addEventListener('click', myFunction);"
+    // }   
+
+    // const script = document.createElement('script');
+    // // script.onload = function () {
+    // //     //do stuff with the script
+    // // };
+    // // script.src = something;
+
+    // document.head.appendChild(script); //or something of the likes
+
+    // document.getElementById('clear').addEventListener('click', alert('Hi'));
+
+    // function deleteCard () {
+    // const el = document.getElementById('card1');
+    // el.remove()
+    // }
 
     // // nodes.setAttribute("id", "entryHolder1");
     // // clone.entryElement.removeChild(clone.entryElement.lastElementChild)
 // };
 };
 
+
+document.querySelector("#content").addEventListener('click', function(e) {
+	if(deleteIds.includes (e.target.id)) {
+		const cardIndex = e.target.id[e.target.id.length-1]
+        document.getElementById(`card${cardIndex}`).remove()
+        // alert('CLICKED');
+        console.log(`card${cardIndex}`);
+	}});
+
+
 export {
     performAction,
     getWeather,
     postData,
     saveTrip,
-    updateUI,
+    updateUI
 }
