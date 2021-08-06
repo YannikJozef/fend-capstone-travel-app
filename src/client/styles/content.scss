@@ -86,13 +86,33 @@
 
 }
 
-#generate {
+
+// These three #generate blocks probably can be refined 
+
+.lrgBtn {
     min-width: 150px;
     min-height: 50px;
     background-color: rgb(240, 237, 231);
     border: solid darkgrey 2px;
     border-radius: 10px;
     color: rgb(46, 44, 42)
+}
+
+.lrgBtn:hover {
+    min-width: 150px;
+    min-height: 50px;
+    background-color: rgb(247, 197, 104);
+    // border: solid darkgrey 2px;
+    // border-radius: 10px;
+    color: rgb(46, 44, 42);
+}
+.lrgBtn:active {
+    // min-width: 150px;
+    // min-height: 50px;
+    background-color: orange;
+    // border: solid darkgrey 2px;
+    // border-radius: 10px;
+    color: white;
 }
 
 .light {

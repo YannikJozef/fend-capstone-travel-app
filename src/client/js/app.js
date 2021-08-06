@@ -162,7 +162,9 @@ function updateUI (apiResponse) {
         
         
         buttonSave.setAttribute("id", "save");
-        buttonElement.setAttribute("id", "clear");
+        buttonSave.setAttribute("class", "lrgBtn");
+        buttonClear.setAttribute("id", "clear");
+        buttonClear.setAttribute("class", "lrgBtn");
         buttonElement.appendChild(buttonClear);
         entryElement.appendChild(buttonSave);
     }
