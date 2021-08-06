@@ -258,10 +258,28 @@ document.querySelector("#content").addEventListener('click', function(e) {
 	}});
 
 
+document.getElementById('btnHolder').addEventListener('click', clearData);
+
+function clearData () {
+    document.getElementById('travelCard').style.border = `` ;
+    document.getElementById('tripData').innerHTML = `` ;
+    document.getElementById('tripData').style.backgroundColor = `` ;
+    document.getElementById('destination').innerHTML = `` ;
+    document.getElementById('temperature').innerHTML = ``;
+    document.getElementById('weather-description').innerHTML = ``;
+    document.getElementById('city-img').removeAttribute('src');
+    document.getElementById('clear').remove();
+    document.getElementById('save').remove();
+    document.getElementById('city-name').value = '';
+    document.getElementById('date-start').value = '';
+
+}
+
 export {
     performAction,
     getWeather,
     postData,
     saveTrip,
-    updateUI
+    updateUI,
+    clearData
 }
