@@ -57,14 +57,30 @@ app.post('/addData', async function (req, res) {
         lng: req.body.lng,
         lat: req.body.lat,
         date: req.body.date,
+        depDate: req.body.depDate
         // feeling: req.body.feeling
     };
     
+    const oneDay = 1000 * 60 * 60 * 24;
+    const dateDif = Math.round(( newEntry.depDate - newEntry.date ) / oneDay)
+    console.log(dateDif);
+    const mDateDif = (dateDif > 15) ? 15:dateDif;
+    // const mDateDif = function () {
+    //     if (dateDif > 15) {
+    //         this.mDateDif = 15
+    //         } else {
+    //             this.mDateDif=dateDif
+    //         }
+    // }
+    console.log(mDateDif);
+
     function addElement (elementList, element) {
         let newList = Object.assign(elementList, element)
         return newList
     };
     // weatherbit API Call
+    console.log(newEntry);
+    console.log(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${newEntry.lat}&lon=${newEntry.lng}&key=${wbApiKey}&units=M`);
     console.log(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${newEntry.lat}&lon=${newEntry.lng}&key=${wbApiKey}&units=M`);
     const responseWb = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${newEntry.lat}&lon=${newEntry.lng}&key=${wbApiKey}&units=M`);
 
@@ -75,18 +91,20 @@ app.post('/addData', async function (req, res) {
     try {
     const apiDataWb = await responseWb.json();
     const apiDataPx = await responsePx.json();
-    const elementWb = { lowTemp: apiDataWb.data[0].low_temp, highTemp: apiDataWb.data[0].high_temp, description: apiDataWb.data[0].weather.description };
+    console.log(apiDataWb.data[0]);
+    const elementWb = { lowTemp: apiDataWb.data[mDateDif].low_temp, highTemp: apiDataWb.data[mDateDif].high_temp, description: apiDataWb.data[mDateDif].weather.description };
     const elementPx = { urlPicture: apiDataPx.hits[0].webformatURL };
-    console.log(elementPx);
     addElement (newEntry, elementWb);
     addElement (newEntry, elementPx)
     projectData.push(newEntry);
-    console.log(newEntry);
+    // console.log(newEntry);
     console.log('Post received');
     projectData.push(newEntry);
     res.send(projectData[projectData.length -1]);
-    console.log(projectData[projectData.length -1])}
+    console.log(projectData[projectData.length -1])
+    }
     catch (error) {
     console.log('error', error);
+    res.send(error);
     }
 });

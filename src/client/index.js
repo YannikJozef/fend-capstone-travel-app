@@ -4,7 +4,9 @@ import {
     postData,
     saveTrip,
     updateUI,
-    clearData
+    clearData,
+    checkInput,
+    noNameFound
 } from './js/app'
 
 import './styles/style.scss'
@@ -18,5 +20,7 @@ export {
     postData,
     saveTrip,
     updateUI,
-    clearData
+    clearData,
+    checkInput,
+    noNameFound
 }
