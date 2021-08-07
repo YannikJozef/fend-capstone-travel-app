@@ -229,15 +229,12 @@ function clearData (e) {
     document.getElementById('temperature').innerHTML = ``;
     document.getElementById('weather-description').innerHTML = ``;
     document.getElementById('city-img').removeAttribute('src');
-    // console.log(document.getElementById('clear').innerHTML);
     document.getElementById('clear').remove();
     document.getElementById('save').remove();
     document.getElementById('city-name').value = '';
     document.getElementById('date-start').value = '';
     }
 }
-
-
 
 export {
     performAction,

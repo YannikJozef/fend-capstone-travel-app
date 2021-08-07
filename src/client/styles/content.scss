@@ -1,5 +1,4 @@
 .content{
-    // background-color: lawngreen;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,7 +32,6 @@
     padding: 10px;
     border-radius: 5px;
     background-color: rgb(240, 237, 231);
-    // border: solid;
 }
 
 .travelPicker {
@@ -41,41 +39,39 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-width: 65vw;
+    width: 100%;
     min-height: 25vh;
-    padding: 10px;
     border-radius: 5px;
     background-color: rgb(240, 237, 231);
-    // border: solid;
 }
 
 .travelPicker > * {
-    padding: 25px;
+    padding: 5px;
     border-radius: 5px;
-    // background-color: rgba(241, 175, 31, 0.247);
-    margin: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
     width: 75%;
     border:rgb(41, 38, 38) solid 1px;
-    // border: solid;
 }
 
 #inputFields > * {
-    margin: 30px;
-    // border:rgb(189, 23, 23) solid 1px;
+    margin: 10px;
 }
 
 .holder {
-    font-size: x-large;
+    display: flex;
+    flex-direction: column;
+    font-size: large;
     font-weight: bold;
 }
 
 .holder > input {
-    font-size: x-large;
+    font-size: large;
     font-family: Arial, Helvetica, sans-serif;
     color: rgb(34, 31, 31);
     border-radius: 5px;
-    // border: none;
     background-color: rgb(240, 237, 231);
+    margin-top: 5px;
 }
 
 .button {
@@ -86,32 +82,21 @@
 
 }
 
-
-// These three #generate blocks probably can be refined 
-
 .lrgBtn {
-    min-width: 150px;
-    min-height: 50px;
+    min-width: 100px;
+    min-height: 35px;
     background-color: rgb(240, 237, 231);
     border: solid darkgrey 2px;
-    border-radius: 10px;
+    border-radius: 8px;
     color: rgb(46, 44, 42)
 }
 
 .lrgBtn:hover {
-    min-width: 150px;
-    min-height: 50px;
     background-color: rgb(247, 197, 104);
-    // border: solid darkgrey 2px;
-    // border-radius: 10px;
     color: rgb(46, 44, 42);
 }
 .lrgBtn:active {
-    // min-width: 150px;
-    // min-height: 50px;
     background-color: orange;
-    // border: solid darkgrey 2px;
-    // border-radius: 10px;
     color: white;
 }
 
@@ -124,12 +109,10 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: -10px;
-    // min-width: 65vw;
-//     min-height: 25vh;
-    padding: 25px;
-    // border-radius: 5px;
-    // background-color: rgb(240, 237, 231);
+    margin-top: 10px;
+    padding: 15px;
+    border-radius: 5px;
+    border: solid rgb(158, 158, 158) 1px;
 }
 
 #tripHolder {
@@ -140,15 +123,14 @@
 }
 
 .yourTrip {
-    font-size: xx-large;
+    font-size: x-large;
     font-weight: bold;
     color: white;
     background-color: orange;
     padding: 5px;
     border-radius: 5px;
     border: none;
-    max-width: 30%;
-    // align-self: flex-start;
+    max-width: 40%;
 }
 
 #tripData {
@@ -156,15 +138,159 @@
     font-size: large;
     font-weight: bold;
     color: white;
-    // background-color: orange;
     padding: 5px;
-    border-radius: 5px;
-    border: none;
-    max-width: 25%;
+    border-bottom: solid white 1px;
+    max-width: 100%;
 }
 
 #entryHolder {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    top:0;
+    left:0;
+    width:100%;
+}
+
+#entryOutput {
+    width:100%;
+    background-color: orange;
+    border-top-left-radius: 5px
+}
+
+#city-img {
+    width: 100%
+}
+
+.outputData {
+    font-size: small;
+    color: white;
+    padding-left: 5px;
+    padding-bottom: 2px;
+    border-bottom: solid white 1px;
+}
+
+
+@media only screen and (min-width: 40.063em) {
+
+    .travelPicker {
+        max-width: 90%;
+        min-height: 25vh;
+        padding: 15px;
+    }
+
+    .holder {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .holder > * {
+        margin-right: 5px;
+        margin-bottom: 10px;
+    }
+
+    #travelCard {
+        padding: 50px;
+    }
+
+    .holder > input {
+        margin-top: 0px;
+        width: 60%
+    }
+
+    .lrgBtn {
+        min-width: 125px;
+        min-height: 40px;
+    }
+
+    .outputData {
+        font-size: medium;
+    }
+}
+
+@media only screen and (min-width: 64.063em) { 
+
+    .travelPicker {
+        max-width: 80%;
+        min-height: 25vh;
+        padding: 25px
+    }
+
+    .holder {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .holder > * {
+        margin-right: 5px;
+        margin-bottom: 20px;
+        font-size: x-large
+
+    }
+
+    .holder > input {
+        margin-top: 0px;
+        width: 50%;
+        font-size: x-large;
+    }
+
+    .lrgBtn {
+        min-width: 135px;
+        min-height: 40px;
+        font-size: large;
+    }
+
+    #inputFields {
+        padding: 40px;
+    }
+
+    #travelCard {
+        padding: 60px;
+    }
+}
+
+@media only screen and (min-width: 90.063em) { 
+
+    .travelPicker {
+        max-width: 70%;
+        min-height: 25vh;
+        padding: 50px;
+    }
+
+    .holder {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .holder > * {
+        margin-right: 5px;
+        margin-bottom: 20px;
+        font-size: x-large
+
+    }
+
+    .holder > input {
+        width: 40%;
+        font-size: x-large;
+    }
+
+
+    #inputFields {
+        padding: 50px;
+    }
+
+    #travelCard {
+        padding: 70px;
+    }
+
+    .yourTrip {
+        font-size: xx-large;
+    }
+    
+    #tripData {
+        font-size: xx-large;
+    }
 }
