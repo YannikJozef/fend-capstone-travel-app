@@ -1,0 +1,47 @@
+@media only screen and (min-width: 64.063em) { 
+
+    .travelPicker {
+        max-width: 80%;
+        min-height: 25vh;
+        padding: 25px
+    }
+
+    .travelPicker {
+        max-width: 80%;
+        min-height: 25vh;
+        padding: 25px
+    }
+
+    .holder {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .holder > * {
+        margin-right: 5px;
+        margin-bottom: 20px;
+        font-size: x-large
+
+    }
+
+    .holder > input {
+        margin-top: 0px;
+        width: 50%;
+        font-size: x-large;
+    }
+
+    .lrgBtn {
+        min-width: 135px;
+        min-height: 40px;
+        font-size: large;
+    }
+
+    #inputFields {
+        padding: 40px;
+    }
+
+    #travelCard {
+        padding: 60px;
+    }
+}
