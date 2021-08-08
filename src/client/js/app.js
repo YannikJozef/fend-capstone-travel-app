@@ -65,6 +65,8 @@ async function  noNameFound () {
             const dims = img.getBoundingClientRect().width;
             trip.style.minWidth = dims + 'px';
             trip.style.backgroundColor = `Orange`;
+            trip.style.width = '100%';
+            img.style.width = '100%';
             trip.innerHTML = `Destination could not be found, Please check and try again! It is surely beautiful there!`
             console.log(dims);
         };
@@ -136,6 +138,8 @@ function updateUI (apiResponse) {
         const dims = img.getBoundingClientRect().width;
         trip.style.minWidth = dims + 'px';
         trip.style.backgroundColor = `Orange`;
+        trip.style.width = '100%';
+        img.style.width = '100%';
         trip.innerHTML = `Trip Data`
         console.log(dims);
     };
@@ -184,7 +188,8 @@ function saveTrip(e) {
     
 
 
-    clone.id = "clone" + document.getElementById('city-name').value + counter;
+    clone.id = "clone" + counter;
+    clone.setAttribute("class", "clone");
     const contentElement = document.getElementsByClassName('content')[0];
     const cardElement = document.createElement('div');
     contentElement.appendChild(cardElement);
