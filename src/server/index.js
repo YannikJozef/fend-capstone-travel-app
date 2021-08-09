@@ -27,31 +27,31 @@ app.use(bodyParser.urlencoded({
 app.use(express.static('dist'))
 
 // Initialize the index.html page, when entering root url
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
     res.sendFile('dist/index.html')
 });
 
 // Setup Server
 const port = 8000;
 
-const server = app.listen(port, listening);
-
-function listening() {
+const listening = () => {
     console.log('Server is running');
     console.log(`running on local host ${port}`);
 };
 
-// GET method route
-app.get('/all', sendData);
+const server = app.listen(port, listening);
 
-function sendData(req, res) {
+// GET method route
+const sendData = (req, res) => {
     console.log('Request Received');
     // console.log(projectData);
     res.send(projectData[0]);
 };
 
+app.get('/all', sendData);
+
 // POST method route
-app.post('/addData', async function (req, res) {
+app.post('/addData', async (req, res) => {
     
     // storing the data from client post request in Object "New Entry"
 
@@ -69,7 +69,7 @@ app.post('/addData', async function (req, res) {
     const mDateDif = (dateDif > 15) ? 15:dateDif;
 
     // function to add object entries to an object
-    function addElement (elementList, element) {
+    const addElement = (elementList, element) => {
         let newList = Object.assign(elementList, element)
         return newList
     };

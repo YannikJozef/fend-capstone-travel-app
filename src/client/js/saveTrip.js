@@ -4,7 +4,7 @@ let deleteIds = [];
 
 
 // Function to save trips
-function saveTrip(e) {
+const saveTrip = (e) => {
     
     counter++;
     
@@ -46,7 +46,7 @@ function saveTrip(e) {
 };
 
 // Event Handler for deleting saved trips by event delegation function to prevent using an element befor its creation
-document.querySelector("#content").addEventListener('click', function(e) {
+document.querySelector("#content").addEventListener('click', (e) => {
 	if(deleteIds.includes (e.target.id)) {
 		const cardIndex = e.target.id[e.target.id.length-1]
         document.getElementById(`card${cardIndex}`).remove()

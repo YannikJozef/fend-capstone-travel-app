@@ -1,9 +1,6 @@
-// Event handler to reset all data in the upper container, where data is entered
-
-document.getElementById('holderClear').addEventListener('click', clearData);
-
 // function to reset data
-function clearData (e) {
+const clearData = (e) => {
+    e.preventDefault();
     if(e.target.id == 'clear') {
     document.getElementById('travelCard').style.border = `` ;
     document.getElementById('tripData').innerHTML = `` ;
@@ -18,6 +15,11 @@ function clearData (e) {
     document.getElementById('date-start').value = '';
     }
 }
+
+// Event handler to reset all data in the upper container, where data is entered
+
+document.getElementById('holderClear').addEventListener('click', clearData);
+
 
 export {
     clearData

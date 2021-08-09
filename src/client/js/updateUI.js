@@ -1,4 +1,4 @@
-function updateUI (apiResponse) {
+const updateUI = (apiResponse) => {
     
     // Declaring local variables for the updating of visible UI elements except for button
     
@@ -38,7 +38,6 @@ function updateUI (apiResponse) {
     
     const buttonSave = document.createElement("button");
     const nodeSave = document.createTextNode("Save Trip");
-    console.log(nodeSave);
     buttonSave.appendChild(nodeSave);
     buttonSave.setAttribute("id", "save");
     buttonSave.setAttribute("class", "lrgBtn");
@@ -47,7 +46,6 @@ function updateUI (apiResponse) {
         if(checkClear == false) {
             const buttonClear = document.createElement("button");
             const nodeClear = document.createTextNode("Clear Data");
-            console.log(buttonClear);
             buttonClear.appendChild(nodeClear);
             buttonClear.setAttribute("id", "clear");
             buttonClear.setAttribute("class", "lrgBtn");

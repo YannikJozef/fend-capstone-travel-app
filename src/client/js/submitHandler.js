@@ -1,7 +1,6 @@
-//Event Listener Function to generate the trip
-document.getElementById('generate').addEventListener('click', submitHandler);
 
-function submitHandler(e) {
+// Function to generate the initiate API calls and the UI updating
+const submitHandler = (e) => {
     const cityName = document.getElementById('city-name').value;
     if(Client.checkInput()) {
             Client.postData('http://localhost:8000/addData', {
@@ -13,7 +12,7 @@ function submitHandler(e) {
 }
 
 // Function to be executed, when API receives an error and the trip (either image or name) could not be found
-function  noNameFound (newData) {
+const noNameFound = (newData) => {
     const imgUrl = newData.urlPicture
     console.log(imgUrl);
 
@@ -70,6 +69,9 @@ const postData = async (url = '', data = {}) => {
         // appropriately handle the error
     }
 }
+
+//Event Listener Function to generate the trip
+document.getElementById('generate').addEventListener('click', submitHandler);
 
 export {
     postData,
