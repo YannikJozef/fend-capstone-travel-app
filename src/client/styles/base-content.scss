@@ -1,3 +1,5 @@
+// scss file to define the main content of the page for small devices
+
 .content{
     display: flex;
     flex-direction: column;
@@ -140,7 +142,6 @@
     margin-top: 10px;
     padding: 15px;
     border-radius: 5px;
-    // border: solid rgb(158, 158, 158) 1px;
 }
 
 #tripHolder {
@@ -167,8 +168,6 @@
     font-weight: bold;
     color: white;
     padding: 5px;
-    // border-bottom: solid white 1px;
-    // max-width: 100%;
 }
 
 #entryHolder {
@@ -182,8 +181,6 @@
 
 #entryOutput {
     width:100%;
-    // background-color: orange;
-    // border-top-left-radius: 5px
 }
 
 #city-img {
@@ -195,5 +192,4 @@
     color: white;
     padding-left: 5px;
     padding-bottom: 2px;
-    // border-bottom: solid white 1px;
 }

@@ -5,30 +5,21 @@
     <title>Capstone Travel App</title>
     <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
 </head>
- 
-
 <body>
-  <!-- <div id = "app">
-    <header>
-      <p>Hello</p>
-    </header>
-    <div class = "content">
-      <p>Hey I am a content</p>
-    </div>
-    <footer>
-      <p>This by the way is a footer</p>
-    </footer>
-  </div> -->
-
   <div id = "app">
+    
+    <!-- Header of the page -->
     <header>
       <div class="logo">Logo</div>
       <div class ="holder headline">Travel App</div>
       <div class="navigation">Navigation</div>
     </header>
-    <div class="content" id="content">
-      <section class="travelPicker">
 
+    <!-- Content of the page -->
+    <div class="content" id="content">
+      
+      <!-- The travel picker section is the section, where the user can input data and sees the trip data -->
+      <section class="travelPicker">
         <div id = "inputFields" >
           <div class ="holder city">
             <label for="city-name">My trip to: </label>
@@ -43,21 +34,7 @@
               <button id="generate" class="lrgBtn" type = "submit"> Generate Trip </button>
             </div >
             <div id="holderClear"></div>
-            <!-- <button id="save" type = "submit"> save </button> -->
           </div>
-
-          <!-- <div id ="travelCard">
-            <div id = "entryHolder">
-              <div id = "entryOutput">
-                <div id = "tripData">Your Trip</div>
-                <div class="outputData" id = "destination">Frankfurt, <span class = "light">Germany is 220 Days away</span></div> 
-                <div class="outputData" id = "temperature">max tempreature: <span class = "light">30 C°</span>, lowest temperature: <span class = "light">20 C°</span></div>
-                <div class="outputData" id = "weather-description">Description: <span class = "light">Scattered Clouds</span></div>
-              </div>
-              <img id= "city-img" src='https://pixabay.com/get/g6ce7ad615666b61e6c99c11edf6ca7d3b0577a89aca3f405210589ed8e4649cdacf93ab8eb53d9fe4ba9ed7a7abffcadccc7975a4d8b5348ec0c033903ee07f6_640.jpg'>
-            </div>
-        </div> -->
-
           <div id ="travelCard">
             <div id = "entryHolder">
               <div id = "entryOutput">
@@ -70,28 +47,14 @@
             </div>
         </div>
       </section>
-      <div id = "tripHolder">
-        <div class = "yourTrip">Your Trips:</div>
-      </div>
-      <!-- Example -->
-      <!-- <div class ="holder travelCard">
-        <div id = "entryHolder">
-          <div id = "destination">Frankfurt, <span class = "light">Germany is 220 Days away</span></div> 
-          <div id = "temperature">max tempreature: <span class = "light">30 C°</span>, lowest temperature: <span class = "light">20 C°</span></div>
-          <div id = "weather-description">Description: <span class = "light">Scattered Clouds</span></div>
-          <img id= "city-img" src='https://cdn.pixabay.com/photo/2016/11/06/23/51/buildings-1804481_960_720.jpg'>
-        </div>
-      </div> -->
       
-      <!-- <div class ="holder travelCard">
-        <div id = "entryHolder">
-          <div id = "destination"></div> 
-          <div id = "temperature"></div>
-          <div id = "weather-description"></div>
-          <img id= "city-img" src=''>
-        </div>
-      </div> -->
+      <!-- small title, every elements that are saved will be generated automatically -->
+      <section id = "tripHolder">
+        <div class = "yourTrip">Your Trips:</div>
+      </section>
     </div>
+
+    <!-- Footer of the page -->
       <footer>
         <p>Uses different APIs for receiving Data</p>
       </footer>

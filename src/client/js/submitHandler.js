@@ -1,67 +1,54 @@
-/* Global Variables */
-const baseURL = `http://api.geonames.org/searchJSON?q=`;
-const apiKey = '&maxRows=1&username=yannikj.';
-const pixApiKey = '22433349-90438b99a1f81d56be93e50f6';
-
-// Create a new date instance dynamically with JS
-let d = new Date();
-let newDate = d.getMonth() + 1 + '/' + d.getDate() + '/' + d.getFullYear();
-
-
-//Event Listener Function to initiate other functions
+//Event Listener Function to generate the trip
 document.getElementById('generate').addEventListener('click', submitHandler);
 
 function submitHandler(e) {
     const cityName = document.getElementById('city-name').value;
     if(Client.checkInput()) {
-        Client.getCity(baseURL, cityName, apiKey).then(function (data) {
             Client.postData('http://localhost:8000/addData', {
-                name: data.geonames[0].name,
-                country: data.geonames[0].countryName,
-                lng: data.geonames[0].lng,
-                lat: data.geonames[0].lat,
+                name: cityName,
                 date: new Date().getTime(),
                 depDate: new Date(document.getElementById('date-start').value).getTime()
-            }).then(response => {return response;}).then( (response) => { Client.updateUI(response) } )
-        });
+            }).then(response => {return response;}).then( (response) => { Client.updateUI(response) } );
     }
 }
 
-async function  noNameFound () {
-    const responsePx = await fetch(`https://pixabay.com/api/?key=${pixApiKey}&q=beach&image_type=photo`)
-    console.log(responsePx);
-    try {
-        const apiDataPx = await responsePx.json();
-        console.log(apiDataPx);
-        const elementPx = { urlPicture: apiDataPx.hits[0].webformatURL };
-        console.log(elementPx);
-        document.getElementById('travelCard').style.border = `solid darkgrey 2px` ;
-        document.getElementById('city-img').setAttribute('src', elementPx['urlPicture']);
-        document.getElementById('destination').innerHTML = `` ;
-        document.getElementById('temperature').innerHTML = ``;
-        document.getElementById('weather-description').innerHTML = ``;
-        document.getElementById('city-name').value = '';
-        document.getElementById('date-start').value = '';
-        console.log(elementPx['urlPicture']);
-        if (document.getElementById('entryHolder').contains(document.getElementById("save")) == true) {
-            document.getElementById('save').remove();
-        };
-        const trip = document.getElementById('tripData');
-        const img = document.getElementById('city-img');
-        img.onload = function (){ 
-            const dims = img.getBoundingClientRect().width;
-            trip.style.minWidth = dims + 'px';
-            trip.style.backgroundColor = `Orange`;
-            trip.style.width = '100%';
-            img.style.width = '100%';
-            trip.innerHTML = `Destination could not be found, Please check and try again! It is surely beautiful there!`
-            console.log(dims);
-        };
-    } catch (error) {
-        console.log('Error', error);
-    }
+// Function to be executed, when API receives an error and the trip (either image or name) could not be found
+function  noNameFound (newData) {
+    const imgUrl = newData.urlPicture
+    console.log(imgUrl);
+
+    // Declaring local variables for the updating of visible UI elements
+
+    const trCard = document.getElementById('travelCard');
+    const dest = document.getElementById('destination');
+    const temp = document.getElementById('temperature');
+    const weDesc = document.getElementById('weather-description');
+    const img = document.getElementById('city-img');
+    const trip = document.getElementById('tripData');
+    const cName = document.getElementById('city-name');
+    const sStart = document.getElementById('date-start');
+
+    // Functionality to set html elements to empty strings and styling
+
+    trCard.style.border = `solid darkgrey 2px` ;
+    img.setAttribute('src', imgUrl);
+    dest.innerHTML = `` ;
+    temp.innerHTML = ``;
+    weDesc.innerHTML = ``;
+    cName.value = '';
+    sStart.value = '';
+    trip.style.backgroundColor = `Orange`;
+    trip.style.width = '100%';
+    img.style.width = '100%';
+    trip.innerHTML = `Destination could not be found, Please check and try again! It is surely beautiful there!`
+
+    // checking and eventually removing save button
+    if (document.getElementById('entryHolder').contains(document.getElementById("save")) == true) {
+        document.getElementById('save').remove();
+    };
 };
 
+// Post request to post data to the server, where the three APIs begin to work
 const postData = async (url = '', data = {}) => {
     const response = await fetch(url, {
         method: 'POST',
@@ -75,7 +62,7 @@ const postData = async (url = '', data = {}) => {
         const newData = await response.json();
         if (newData.name == undefined) {
             console.log(newData)
-            noNameFound(); } else {
+            noNameFound(newData); } else {
             console.log(newData)
             return newData}
     } catch (error) {

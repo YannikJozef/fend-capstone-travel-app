@@ -1,6 +1,5 @@
 import { checkInput} from './js/checkInput'
 import { clearData} from './js/clearData'
-import { getCity} from './js/getCity'
 import { saveTrip} from './js/saveTrip'
 import { updateUI} from './js/updateUI'
 import { 
@@ -21,7 +20,6 @@ import './styles/desktop2-content.scss'
 export {
     checkInput,
     clearData,
-    getCity,
     noNameFound,
     postData,
     saveTrip,

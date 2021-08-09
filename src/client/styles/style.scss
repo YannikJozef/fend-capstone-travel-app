@@ -1,6 +1,6 @@
+// scss file to style the fundamental Elements
+
 body{
-    // margin-left: 75px;
-    // margin-right: 75px;
     background: #fffff8;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
@@ -10,7 +10,6 @@ body{
     grid-template-rows: repeat(150px, 1fr ,1fr ,1fr ,1fr ,1fr ,1fr ,1fr ,1fr ,150px);
     min-height: 120vh;
 }
-
 
 @media only screen and (min-width: 90.063em) { 
     body{

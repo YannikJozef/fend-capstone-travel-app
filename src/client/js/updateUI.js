@@ -2,7 +2,6 @@ function updateUI (apiResponse) {
     
     // Declaring local variables for the updating of visible UI elements except for button
     
-    // console.log(apiResponse);
     const date1 = new Date().getTime();
     const date2 = new Date(document.getElementById('date-start').value).getTime();
     const oneDay = 1000 * 60 * 60 * 24;
