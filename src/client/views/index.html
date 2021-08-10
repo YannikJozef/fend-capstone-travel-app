@@ -38,10 +38,10 @@
           <div id ="travelCard">
             <div id = "entryHolder">
               <div id = "entryOutput">
-                <div id = "tripData"></div>
-                <div id = "destination"></div> 
-                <div id = "temperature"></div>
-                <div id = "weather-description"></div>
+                <div id = "tripData" class = "trData"></div>
+                <div id = "destination" class = "trData"></div> 
+                <div id = "temperature" class = "trData"></div>
+                <div id = "weather-description" class = "trData"></div>
               </div>
               <img id= "city-img" src=''>
             </div>
@@ -59,5 +59,15 @@
         <p>Uses different APIs for receiving Data</p>
       </footer>
   </div>
+
+  <script>
+    if('serviceWorker' in navigator) { 
+      navigator.serviceWorker.register('../firebase-messaging-sw.js')
+    .then(function(registration) {
+     console.log("Service Worker Registered");
+    messaging.useServiceWorker(registration);  
+      }); 
+      }
+   </script>
 </body>
 </html>

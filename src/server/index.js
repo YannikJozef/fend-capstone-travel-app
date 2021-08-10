@@ -45,7 +45,7 @@ const server = app.listen(port, listening);
 const sendData = (req, res) => {
     console.log('Request Received');
     // console.log(projectData);
-    res.send(projectData[0]);
+    res.send(projectData[projectData.length -1]);
 };
 
 app.get('/all', sendData);
@@ -149,3 +149,5 @@ app.post('/addData', async (req, res) => {
         }
     }
 });
+  
+module.exports = app;
