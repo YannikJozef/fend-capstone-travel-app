@@ -1,44 +1,41 @@
-# Weather-Journal App Project
+# Front End Capstone Project - Travel App
 
-## Overview
-This an asynchronous web app that uses Web API and user data to dynamically update the UI. The html and css was provided as template from
+An app that takes a city and departure date as input. It generates a card that includes basic information about city and country as well as a weatherforecast for the departure date. A photo of the place is also shown. When the destination or the APIs are not sending processable data, the picture will be a default picture. 
 
-## Project-Rubric
+## Prerequisites
 
-The project is created in accordance to the following specifications:
+You will need to create some accounts to access the api key. Are they:
+- [Geonames](http://www.geonames.org/export/web-services.html)
+- [Weatherbit](https://www.weatherbit.io/account/create)
+- [Pixabay](https://pixabay.com/api/docs/)
+
+Further the project requires the following:
+- Installation of Node.js
+- Create .env file in the root directory;
+- Add the required API keys to the .env file
+
+
+## Extend your Project Further
+following items were integrated as functionality into the app according to "Extend your Project Further":
+- Pull in an image for the country from Pixabay API when the entered location brings up no results
+- Allow the user to remove the trip
+
+## Running the App
+
+As described please install or configure points from the "Prerequisites". To build the code use the command npm run run build-prod to run the app in development mode use npm run build-dev. To start the express server use npm run start.
+
+## Running the tests
+
+To run the tests use the command npm run test
 
 * [Nanodegree Project Rubric Guide](https://review.udacity.com/#!/rubrics/2655/view/)
 
-## File-Structure
-
-The project files are structured as follows:
-
- * [website](./website)
-   * [app.js](./website/app.js)
-   * [index.html](./website/index.html)
-   * [style.css](./website/style.css)
- * [server.js](./server.js)
- * [README.md](./README.md)
-
-## Getting Started
-For the installation of the application it is necessary that Node.JS is installed on your computer.
-
-### Installing
-At the root of the application install the dependencies
-
-```
-npm install
-```
-
-Initialize the server
-
-```
-node server.js
-```
-
-Access the localhost on port 8000
-
-```
-http://localhost:8000/
-```
+## Build with
+- [webpack](https://webpack.js.org/)
+- [Sass](https://sass-lang.com/)
+- [Express](https://expressjs/)
+- [Jest](https://jestjs.io/)
+- [Geonames](http://www.geonames.org/export/web-services.html)
+- [Weatherbit](https://www.weatherbit.io/account/create)
+- [Pixabay](https://pixabay.com/api/docs/)
 
