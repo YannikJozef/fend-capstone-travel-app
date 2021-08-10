@@ -4,7 +4,7 @@ An app that takes a city and departure date as input. It generates a card that i
 
 ## Prerequisites
 
-You will need to create some accounts to access the api key. Are they:
+You will need to create accounts to access the api key for following APIs::
 - [Geonames](http://www.geonames.org/export/web-services.html)
 - [Weatherbit](https://www.weatherbit.io/account/create)
 - [Pixabay](https://pixabay.com/api/docs/)
@@ -27,8 +27,6 @@ As described please install or configure points from the "Prerequisites". To bui
 ## Running the tests
 
 To run the tests use the command npm run test
-
-* [Nanodegree Project Rubric Guide](https://review.udacity.com/#!/rubrics/2655/view/)
 
 ## Build with
 - [webpack](https://webpack.js.org/)
