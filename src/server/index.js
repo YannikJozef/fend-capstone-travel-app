@@ -1,34 +1,36 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
-var path = require('path')
-const express = require('express')
-var bodyParser = require('body-parser')
-var cors = require('cors')
-const fetch = require("node-fetch");
+var path = require('path');
+const express = require('express');
+var bodyParser = require('body-parser');
+var cors = require('cors');
+const fetch = require('node-fetch');
 
 //referring to the env file to get the API key
 const wbApiKey = process.env.wbApiKey;
-const pixApiKey = process.env.pixApiKey
+const pixApiKey = process.env.pixApiKey;
 const gnApiKey = process.env.gnApiPw;
 
 // Setup empty JS object to act as endpoint for all routes
 let projectData = [];
 
-const app = express()
-app.use(cors())
+const app = express();
+app.use(cors());
 // to use json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 // to use url encoded values
-app.use(bodyParser.urlencoded({
-  extended: true
-}))
+app.use(
+    bodyParser.urlencoded({
+        extended: true,
+    })
+);
 
-app.use(express.static('dist'))
+app.use(express.static('dist'));
 
 // Initialize the index.html page, when entering root url
 app.get('/', (req, res) => {
-    res.sendFile('dist/index.html')
+    res.sendFile('dist/index.html');
 });
 
 // Setup Server
@@ -45,40 +47,41 @@ const server = app.listen(port, listening);
 const sendData = (req, res) => {
     console.log('Request Received');
     // console.log(projectData);
-    res.send(projectData[projectData.length -1]);
+    res.send(projectData[projectData.length - 1]);
 };
 
 app.get('/all', sendData);
 
 // POST method route
 app.post('/addData', async (req, res) => {
-    
     // storing the data from client post request in Object "New Entry"
 
     let newEntry = {
         name: req.body.name,
         date: req.body.date,
-        depDate: req.body.depDate
+        depDate: req.body.depDate,
     };
-    
-    // Getting the index for requesting the forecast date dependent on the department date, 
-    // when the department date exceeds the max. number of available days the forecast is set to the max 
+
+    // Getting the index for requesting the forecast date dependent on the department date,
+    // when the department date exceeds the max. number of available days the forecast is set to the max
     const oneDay = 1000 * 60 * 60 * 24;
-    const dateDif = Math.round(( newEntry.depDate - newEntry.date ) / oneDay)
+    const dateDif = Math.round((newEntry.depDate - newEntry.date) / oneDay);
     console.log(dateDif);
-    const mDateDif = (dateDif > 15) ? 15:dateDif;
+    const mDateDif = dateDif > 15 ? 15 : dateDif;
 
     // function to add object entries to an object
     const addElement = (elementList, element) => {
-        let newList = Object.assign(elementList, element)
-        return newList
+        let newList = Object.assign(elementList, element);
+        return newList;
     };
 
     // Requesting the additional data from geonames API (e.g. Longitude/Latitude)
-    const responseGn = await fetch(`http://api.geonames.org/searchJSON?q=${req.body.name}&maxRows=1&username=${gnApiKey}`)
+    const responseGn = await fetch(
+        `http://api.geonames.org/searchJSON?q=${req.body.name}&maxRows=1&username=${gnApiKey}`
+    );
 
     try {
-        // Reassining new data to "newEntry" variable 
+        // Reassining new data to "newEntry" variable
         const apiDataGn = await responseGn.json();
         newEntry = {
             name: apiDataGn.geonames[0].name,
@@ -92,62 +95,69 @@ app.post('/addData', async (req, res) => {
         console.log(newEntry);
 
         // Requesting the additional data from the weatherforecast based on index derived from date difference between today and department date
-        // Requesting the image link derived from input data 
-
+        // Requesting the image link derived from input data
 
         // weatherbit API Call
-        const responseWb = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${newEntry.lat}&lon=${newEntry.lng}&key=${wbApiKey}&units=M`);
+        const responseWb = await fetch(
+            `https://api.weatherbit.io/v2.0/forecast/daily?lat=${newEntry.lat}&lon=${newEntry.lng}&key=${wbApiKey}&units=M`
+        );
 
         // pixabay API Call
-        let responsePx = await fetch(`https://pixabay.com/api/?key=${pixApiKey}&q=${req.body.name}&image_type=photo`);
+        let responsePx = await fetch(
+            `https://pixabay.com/api/?key=${pixApiKey}&q=${req.body.name}&image_type=photo`
+        );
 
         try {
-                const apiDataWb = await responseWb.json();
-                let apiDataPx = await responsePx.json();
-                // creating objects based on the two different API Calls
-                const elementWb = { lowTemp: apiDataWb.data[mDateDif].low_temp, highTemp: apiDataWb.data[mDateDif].high_temp, description: apiDataWb.data[mDateDif].weather.description };
-                const elementPx = { urlPicture: apiDataPx.hits[0].webformatURL };
-                // integrating the elements in the two objects to the newEntry Object
-                addElement (newEntry, elementWb);
-                addElement (newEntry, elementPx)
-                // pushing newEntry to the projectData array
-                projectData.push(newEntry);
-                // console.log(newEntry);
-                console.log('Post received');
-                // sending the latest entry in projectData array
-                res.send(projectData[projectData.length -1]);
-                console.log(projectData[projectData.length -1])
-                }
-                catch (error) {
+            const apiDataWb = await responseWb.json();
+            let apiDataPx = await responsePx.json();
+            // creating objects based on the two different API Calls
+            const elementWb = {
+                lowTemp: apiDataWb.data[mDateDif].low_temp,
+                highTemp: apiDataWb.data[mDateDif].high_temp,
+                description: apiDataWb.data[mDateDif].weather.description,
+            };
+            const elementPx = { urlPicture: apiDataPx.hits[0].webformatURL };
+            // integrating the elements in the two objects to the newEntry Object
+            addElement(newEntry, elementWb);
+            addElement(newEntry, elementPx);
+            // pushing newEntry to the projectData array
+            projectData.push(newEntry);
+            // console.log(newEntry);
+            console.log('Post received');
+            // sending the latest entry in projectData array
+            res.send(projectData[projectData.length - 1]);
+            console.log(projectData[projectData.length - 1]);
+        } catch (error) {
+            console.log('error', error);
+            responsePx = await fetch(
+                `https://pixabay.com/api/?key=${pixApiKey}&q=ocean&image_type=photo`
+            );
+            try {
+                const apiDataPx = await responsePx.json();
+                const oceanImg = { urlPicture: apiDataPx.hits[0].webformatURL };
+                console.log(oceanImg);
+                res.send(oceanImg);
+            } catch (error) {
                 console.log('error', error);
-                responsePx = await fetch(`https://pixabay.com/api/?key=${pixApiKey}&q=ocean&image_type=photo`);
-                    try {
-                        const apiDataPx = await responsePx.json();
-                        const oceanImg = { urlPicture: apiDataPx.hits[0].webformatURL }
-                        console.log(oceanImg);
-                        res.send(oceanImg)
-                    }
-                    catch (error) {
-                        console.log('error', error);
-                        res.send(error);
-                    }
-                }
-    }
-    catch (error) {
+                res.send(error);
+            }
+        }
+    } catch (error) {
         console.log('error', error);
         // sending a picture of the ocean instead
-        responsePx = await fetch(`https://pixabay.com/api/?key=${pixApiKey}&q=ocean&image_type=photo`);
+        responsePx = await fetch(
+            `https://pixabay.com/api/?key=${pixApiKey}&q=ocean&image_type=photo`
+        );
         try {
             const apiDataPx = await responsePx.json();
-            const oceanImg = { urlPicture: apiDataPx.hits[0].webformatURL }
+            const oceanImg = { urlPicture: apiDataPx.hits[0].webformatURL };
             console.log(oceanImg);
-            res.send(oceanImg)
-        }
-        catch (error) {
+            res.send(oceanImg);
+        } catch (error) {
             console.log('error', error);
             res.send(error);
         }
     }
 });
-  
+
 module.exports = app;
