@@ -4,7 +4,7 @@ An app that takes a city and departure date as input. It generates a card that i
 
 ## Prerequisites
 
-You will need to create accounts to access the api key for following APIs::
+You will need to create accounts to access the api key for following APIs:
 - [Geonames](http://www.geonames.org/export/web-services.html)
 - [Weatherbit](https://www.weatherbit.io/account/create)
 - [Pixabay](https://pixabay.com/api/docs/)
