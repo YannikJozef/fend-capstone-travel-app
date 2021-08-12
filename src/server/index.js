@@ -3,8 +3,8 @@ dotenv.config();
 
 var path = require('path');
 const express = require('express');
-var bodyParser = require('body-parser');
-var cors = require('cors');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const fetch = require('node-fetch');
 
 //referring to the env file to get the API key
@@ -46,8 +46,7 @@ const server = app.listen(port, listening);
 // GET method route
 const sendData = (req, res) => {
     console.log('Request Received');
-    // console.log(projectData);
-    res.send(projectData[projectData.length - 1]);
+    res.send(projectData[projectData]);
 };
 
 app.get('/all', sendData);
@@ -159,5 +158,3 @@ app.post('/addData', async (req, res) => {
         }
     }
 });
-
-module.exports = app;
